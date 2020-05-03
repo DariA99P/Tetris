@@ -52,72 +52,72 @@ const moveLeft = (ctx, curX, y, width, height) => {
     return x;
 };
 
-const getCanvas = (
-    play: boolean,
-    pointsY: number[],
-    pointsX: Array<number[]>,
-) => {
-    const canvas = document.getElementById('canvasId');
-    let ctx;
-    let x = 25;
-    let y = 20;
-    let width = 0;
-    let height = 0;
-    let maxY = 720;
-    let maxX = 0;
-    let arrayY: number[] = pointsY;
-    let arrayX: Array<number[]> = pointsX;
-    console.log(arrayY);
-    console.log(arrayX);
-    // @ts-ignore
-    if (canvas.getContext && play) {
-        // @ts-ignore
-        ctx = canvas.getContext("2d");
-        let numFigure = randomInteger(0, 1);
-        switch (numFigure) {
-            case 0: {
-                ctx.fillStyle = '#FEA04C';
-                width = RECTANGLE_WIDTH;
-                height = RECTANGLE_HEIGHT;
-                maxX = 275;
-                break;
-            }
-            default: {
-                ctx.fillStyle = '#F5E43D';
-                width = SQUARE_WIDTH;
-                height = SQUARE_HEIGHT;
-                maxX = 325;
-                break;
-            }
-        }
-        ctx.fillRect(x,y,width,height);
-        if (!arrayY.length) {
-            arrayY = [...arrayY, maxY];
-        }
-        document.addEventListener('keydown', (event) => {
-            const keyName = event.key;
-            if (keyName === 'ArrowRight')
-                x = moveRight(ctx, x, y, width, height, maxX);
-            if (keyName === 'ArrowLeft')
-                x = moveLeft(ctx, x, y, width, height);
-            if (keyName === 'ArrowDown')
-                y = moveDown(ctx, x, y, width, height, arrayY, arrayX);
-        });
-
-        const timer = setInterval(() => {
-            y = moveDown(ctx, x, y, width, height, arrayY, arrayX);
-            const saveY = y;
-            if (arrayY.includes(y + height)) {
-                clearInterval(timer);
-                x = 25;
-                y = 20;
-                width = 0;
-                height = 0;
-                getCanvas(play, [...arrayY, saveY], [...arrayX, [x, x + width]]);
-            }
-        }, 500);
-    }
-};
+// const getCanvas = (
+//     play: boolean,
+//     pointsY: number[],
+//     pointsX: Array<number[]>,
+// ) => {
+//     const canvas = document.getElementById('canvasId');
+//     let ctx;
+//     let x = 25;
+//     let y = 20;
+//     let width = 0;
+//     let height = 0;
+//     let maxY = 720;
+//     let maxX = 0;
+//     let arrayY: number[] = pointsY;
+//     let arrayX: Array<number[]> = pointsX;
+//     console.log(arrayY);
+//     console.log(arrayX);
+//     // @ts-ignore
+//     if (canvas.getContext && play) {
+//         // @ts-ignore
+//         ctx = canvas.getContext("2d");
+//         let numFigure = randomInteger(0, 1);
+//         switch (numFigure) {
+//             case 0: {
+//                 ctx.fillStyle = '#FEA04C';
+//                 width = RECTANGLE_WIDTH;
+//                 height = RECTANGLE_HEIGHT;
+//                 maxX = 275;
+//                 break;
+//             }
+//             default: {
+//                 ctx.fillStyle = '#F5E43D';
+//                 width = SQUARE_WIDTH;
+//                 height = SQUARE_HEIGHT;
+//                 maxX = 325;
+//                 break;
+//             }
+//         }
+//         ctx.fillRect(x,y,width,height);
+//         if (!arrayY.length) {
+//             arrayY = [...arrayY, maxY];
+//         }
+//         document.addEventListener('keydown', (event) => {
+//             const keyName = event.key;
+//             if (keyName === 'ArrowRight')
+//                 x = moveRight(ctx, x, y, width, height, maxX);
+//             if (keyName === 'ArrowLeft')
+//                 x = moveLeft(ctx, x, y, width, height);
+//             if (keyName === 'ArrowDown')
+//                 y = moveDown(ctx, x, y, width, height, arrayY, arrayX);
+//         });
+//
+//         const timer = setInterval(() => {
+//             y = moveDown(ctx, x, y, width, height, arrayY, arrayX);
+//             const saveY = y;
+//             if (arrayY.includes(y + height)) {
+//                 clearInterval(timer);
+//                 x = 25;
+//                 y = 20;
+//                 width = 0;
+//                 height = 0;
+//                 getCanvas(play, [...arrayY, saveY], [...arrayX, [x, x + width]]);
+//             }
+//         }, 500);
+//     }
+// };
 
 export let nextFigure: TypeFigure = randomInteger(0, 6);
 let score = 0;
@@ -319,9 +319,12 @@ const setCanvasSettings = () => {
         },10);
     };
 }
-export const CanvasComponentStyled: React.FC<{ play: boolean; }> = ({ play }) => {
-    document.addEventListener(
-        'DOMContentLoaded', setCanvasSettings,
-    );
+export const CanvasComponentStyled: React.FC = () => {
+    React.useEffect(() => {
+        setCanvasSettings();
+    }, [])
+    // document.addEventListener(
+    //     'DOMContentLoaded', setCanvasSettings,
+    // );
     return <canvas id="canvasId" width='300' height='500' style={{ border: '2px solid' }}/>
 };

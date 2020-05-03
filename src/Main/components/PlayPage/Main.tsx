@@ -8,7 +8,6 @@ import {CanvasComponentStyled} from "../figures/rectangle";
 import {TextStyled} from "../Auth/styled";
 
 export const MainComponent: React.FC = () => {
-  const [play, setPlay] = React.useState(false);
   return (
       <MainComponentStyled>
           <DivComponentStyled>
@@ -21,7 +20,7 @@ export const MainComponent: React.FC = () => {
               <div style={{ marginTop: '16px' }} id='resultId'/>
           </DivComponentStyled>
           <DivComponentStyled>
-              <CanvasComponentStyled play={play}/>
+              <CanvasComponentStyled />
           </DivComponentStyled>
       </MainComponentStyled>
   );
