@@ -2,55 +2,55 @@ import React from "react";
 import {collide, colors, getFigure, makeMatrix, rotateFigure} from "../helpers";
 import {ButtonCode, TypeFigure} from "../enum";
 
-const  SHIFT = 25;
-const RECTANGLE_WIDTH = 150;
-const RECTANGLE_HEIGHT = 50;
-
-const SQUARE_WIDTH = 100;
-const SQUARE_HEIGHT = 100;
+// const  SHIFT = 25;
+// const RECTANGLE_WIDTH = 150;
+// const RECTANGLE_HEIGHT = 50;
+//
+// const SQUARE_WIDTH = 100;
+// const SQUARE_HEIGHT = 100;
 
 const randomInteger = (min, max) => {
     const rand = min - 0.5 + Math.random() * (max - min + 1);
     return Math.abs(Math.round(rand));
 };
 
-const moveDown = (ctx, x, curY, width, height, arrayY: number[], arrayX: Array<number[]>) => {
-    let y = curY;
-    const isValid = arrayY
-        .filter(
-            value => y + SHIFT + height <= value ||
-                (
-                    !arrayX.find(valX => x + width > valX[0])
-                )
-        ).length;
-
-    if (isValid) {
-        ctx.clearRect(x,y,width,height);
-        y += SHIFT;
-        ctx.fillRect(x,y,width,height);
-    }
-    return y;
-};
-
-const moveRight = (ctx, curX, y, width, height, maxX) => {
-    let x = curX;
-    if (x + SHIFT <= maxX) {
-        ctx.clearRect(x,y,width,height);
-        x += SHIFT;
-        ctx.fillRect(x,y,width,height);
-    }
-    return x;
-};
-
-const moveLeft = (ctx, curX, y, width, height) => {
-    let x = curX;
-    if (x - SHIFT > 24) {
-        ctx.clearRect(x,y,width,height);
-        x -= SHIFT;
-        ctx.fillRect(x,y,width,height);
-    }
-    return x;
-};
+// const moveDown = (ctx, x, curY, width, height, arrayY: number[], arrayX: Array<number[]>) => {
+//     let y = curY;
+//     const isValid = arrayY
+//         .filter(
+//             value => y + SHIFT + height <= value ||
+//                 (
+//                     !arrayX.find(valX => x + width > valX[0])
+//                 )
+//         ).length;
+//
+//     if (isValid) {
+//         ctx.clearRect(x,y,width,height);
+//         y += SHIFT;
+//         ctx.fillRect(x,y,width,height);
+//     }
+//     return y;
+// };
+//
+// const moveRight = (ctx, curX, y, width, height, maxX) => {
+//     let x = curX;
+//     if (x + SHIFT <= maxX) {
+//         ctx.clearRect(x,y,width,height);
+//         x += SHIFT;
+//         ctx.fillRect(x,y,width,height);
+//     }
+//     return x;
+// };
+//
+// const moveLeft = (ctx, curX, y, width, height) => {
+//     let x = curX;
+//     if (x - SHIFT > 24) {
+//         ctx.clearRect(x,y,width,height);
+//         x -= SHIFT;
+//         ctx.fillRect(x,y,width,height);
+//     }
+//     return x;
+// };
 
 // const getCanvas = (
 //     play: boolean,
@@ -323,8 +323,5 @@ export const CanvasComponentStyled: React.FC = () => {
     React.useEffect(() => {
         setCanvasSettings();
     }, [])
-    // document.addEventListener(
-    //     'DOMContentLoaded', setCanvasSettings,
-    // );
     return <canvas id="canvasId" width='300' height='500' style={{ border: '2px solid' }}/>
 };
