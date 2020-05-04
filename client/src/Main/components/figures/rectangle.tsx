@@ -243,7 +243,7 @@ const setCanvasSettings = () => {
             }
         }
     };
-    const draw = () => {
+    const canvasDrawFigure = () => {
         context.fillStyle = '#fff';
         contextNext.fillStyle = '#fff';
         // @ts-ignore
@@ -262,7 +262,7 @@ const setCanvasSettings = () => {
             playerDrop();
             time=0;
         }
-        draw();
+        canvasDrawFigure();
     };
     const setStatePlayer = text => {
         clearInterval(gameLoop);
@@ -277,7 +277,7 @@ const setCanvasSettings = () => {
     setStatePlayer('Начните игру');
     if (gameRun) {
        runGame();
-       draw();
+       canvasDrawFigure();
    }
     document.addEventListener('keydown',function(e){
         switch (e.keyCode) {
